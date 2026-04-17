@@ -132,6 +132,9 @@ class TimerUI {
             this.loadStatsDisplay();
             this.timer.reset();
             this.updateDisplay();
+            if (this.dom.startBtn) {
+                this.dom.startBtn.textContent = '開始';
+            }
         } catch (error) {
             console.error('Session completion error:', error);
             this.showErrorNotification('エラーが発生しました');
