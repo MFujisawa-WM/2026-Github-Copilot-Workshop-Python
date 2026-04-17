@@ -38,9 +38,10 @@ def save_session():
             'message': 'セッションが保存されました'
         }), 201
     except Exception as e:
+        app.logger.exception('Failed to save session')
         return jsonify({
             'status': 'error',
-            'message': str(e)
+            'message': 'セッションの保存中にエラーが発生しました'
         }), 400
 
 
