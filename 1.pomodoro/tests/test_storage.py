@@ -316,20 +316,27 @@ class TestFileStorage:
 # Tests for StorageInterface contract
 
 
+@pytest.fixture
+def contract_storage(request, tmp_path):
+    """Contract tests用のstorage実装を返す"""
+    if request.param == 'mock':
+        return MockStorage()
+    if request.param == 'file':
+        return FileStorage(str(tmp_path / 'contract_storage.json'))
+    raise ValueError(f"Unknown storage type: {request.param}")
+
+
 class TestStorageInterfaceContract:
     """Test that all implementations satisfy the contract"""
 
-    @pytest.mark.parametrize('storage', [
-        MockStorage(),
-        FileStorage(tempfile.NamedTemporaryFile(delete=False).name)
-    ])
-    def test_all_implementations_have_required_methods(self, storage):
+    @pytest.mark.parametrize('contract_storage', ['mock', 'file'], indirect=True)
+    def test_all_implementations_have_required_methods(self, contract_storage):
         """All storage implementations have required methods"""
-        assert hasattr(storage, 'get_sessions')
-        assert hasattr(storage, 'save_session')
-        assert hasattr(storage, 'get_all_sessions')
-        assert hasattr(storage, 'delete_sessions')
-        assert hasattr(storage, 'clear_all')
+        assert hasattr(contract_storage, 'get_sessions')
+        assert hasattr(contract_storage, 'save_session')
+        assert hasattr(contract_storage, 'get_all_sessions')
+        assert hasattr(contract_storage, 'delete_sessions')
+        assert hasattr(contract_storage, 'clear_all')
 
     def test_mock_implements_storage_interface(self):
         """MockStorage implements StorageInterface"""
