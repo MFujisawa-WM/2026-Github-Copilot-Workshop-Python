@@ -1,0 +1,281 @@
+/* ============================================================
+   Pomodoro Timer - Main Stylesheet
+   ============================================================ */
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans JP', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container & Card */
+.container {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Typography */
+.title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 20px;
+}
+
+.status {
+    text-align: center;
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+}
+
+/* Timer Display */
+.timer-display {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.progress-circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.progress-bg {
+    fill: none;
+    stroke: #e5e7eb;
+    stroke-width: 30;
+}
+
+.progress-arc {
+    fill: none;
+    stroke: #4f46e5;
+    stroke-width: 30;
+    stroke-linecap: round;
+    stroke-dasharray: 942; /* circumference = 2π * 150 */
+    stroke-dashoffset: 942; /* 0% progress */
+    transition: stroke-dashoffset 0.5s ease;
+}
+
+.time {
+    position: absolute;
+    font-size: 56px;
+    font-weight: 700;
+    color: #1f2937;
+    text-align: center;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.btn {
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    min-width: 120px;
+}
+
+.btn-start {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    color: white;
+    border: 2px solid transparent;
+}
+
+.btn-start:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.3);
+}
+
+.btn-start:active {
+    transform: scale(0.98);
+}
+
+.btn-reset {
+    background: white;
+    color: #4f46e5;
+    border: 2px solid #4f46e5;
+}
+
+.btn-reset:hover {
+    background: #f0f4ff;
+    transform: scale(1.05);
+}
+
+.btn-reset:active {
+    transform: scale(0.98);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Stats Section */
+.stats {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.stat-complete,
+.stat-minutes {
+    font-size: 24px;
+    font-weight: 700;
+    color: #4f46e5;
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #10b981;
+    color: white;
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: slideIn 0.3s ease;
+    z-index: 1000;
+    font-weight: 500;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+    .card {
+        padding: 24px;
+        border-radius: 16px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .timer-display {
+        width: 240px;
+        height: 240px;
+        margin-bottom: 24px;
+    }
+
+    .time {
+        font-size: 44px;
+    }
+
+    .progress-arc {
+        stroke-width: 24;
+        stroke-dasharray: 753; /* adjusted for smaller radius */
+        stroke-dashoffset: 753;
+    }
+
+    .progress-bg {
+        stroke-width: 24;
+    }
+
+    .btn {
+        padding: 10px 24px;
+        font-size: 14px;
+        min-width: 100px;
+    }
+
+    .controls {
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .stats {
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .stat-complete,
+    .stat-minutes {
+        font-size: 20px;
+    }
+}
+
+/* Dark Mode (Optional - for future enhancement) */
+@media (prefers-color-scheme: dark) {
+    /* Dark mode styles can be added here */
+}
