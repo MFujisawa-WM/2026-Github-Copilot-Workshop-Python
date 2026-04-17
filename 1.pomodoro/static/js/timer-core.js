@@ -50,6 +50,9 @@ class TimerCore {
      * @returns {number} Progress ratio
      */
     getProgressRatio() {
+        if (this.workSeconds === 0) {
+            return 0;
+        }
         return Math.min(1, this.elapsedSeconds / this.workSeconds);
     }
 
