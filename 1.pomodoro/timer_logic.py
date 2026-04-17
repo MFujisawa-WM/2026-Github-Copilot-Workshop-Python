@@ -6,7 +6,7 @@ This module contains the core business logic for the Pomodoro timer:
 - WorkSessionTracker: Tracks session statistics
 """
 
-from datetime import datetime, date
+from datetime import date
 
 
 class PomodoroSession:
