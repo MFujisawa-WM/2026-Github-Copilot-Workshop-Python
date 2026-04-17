@@ -88,7 +88,7 @@ def index():
 @app.route('/api/stats', methods=['GET'])
 def get_stats():
     """本日の統計情報を返す"""
-    # storage.py を通じで取得
+    # storage.py を通じて取得
     return jsonify(storage.load_stats())
 
 @app.route('/api/sessions', methods=['POST'])
