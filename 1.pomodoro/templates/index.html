@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ポモドーロタイマー</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <!-- Header -->
+            <h1 class="title">ポモドーロタイマー</h1>
+            
+            <!-- Status -->
+            <div class="status">作業中</div>
+            
+            <!-- Timer Display -->
+            <div class="timer-display">
+                <!-- SVG Circle Progress -->
+                <svg class="progress-circle" viewBox="0 0 350 350">
+                    <!-- Background circle (gray) -->
+                    <circle cx="175" cy="175" r="150" class="progress-bg" />
+                    
+                    <!-- Progress circle (blue) -->
+                    <circle cx="175" cy="175" r="150" class="progress-arc" />
+                </svg>
+                
+                <!-- Time Display -->
+                <div class="time">25:00</div>
+            </div>
+            
+            <!-- Control Buttons -->
+            <div class="controls">
+                <button class="btn btn-start">開始</button>
+                <button class="btn btn-reset">リセット</button>
+            </div>
+            
+            <!-- Stats Section -->
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">完了</span>
+                    <span class="stat-complete">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">集中時間</span>
+                    <span class="stat-minutes">0時間0分</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/timer-core.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/storage-api.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/timer.js') }}"></script>
+</body>
+</html>
